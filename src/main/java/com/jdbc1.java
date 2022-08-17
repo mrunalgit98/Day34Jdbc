@@ -22,11 +22,13 @@ public class jdbc1 {
     }
 
     public static void main(String [] args) {
-        String sql = "SELECT * FROM employee_payroll";
+        String s1 = "UPDATE EMPLOYEE_PAYROLL SET SALARY = 3500000.00 WHERE fname = 'TERISA'";
+        String s2 = "SELECT * FROM employee_payroll";
         try {
             Connection connection = getConnection();
             java.sql.Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            int result = statement.executeUpdate(s1);
+            ResultSet resultSet = statement.executeQuery(s2);
             while(resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("fname");
@@ -34,7 +36,7 @@ public class jdbc1 {
                 double salary = resultSet.getDouble("salary");
                 double Phone=resultSet.getDouble("Phone");
                 LocalDate start = resultSet.getDate("start").toLocalDate();
-                System.out.println(id+" "+name+" "+gender+" "+" " + Phone + salary+" "+start);
+                System.out.println(id+ " id "+name+" fname " + gender+  "  " + Phone + " salary " + salary + " "+start);
             }
         } catch (SQLException e) {
             e.printStackTrace();
