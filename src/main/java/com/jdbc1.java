@@ -19,14 +19,10 @@ public class jdbc1 {
     }
 
     public static void main(String [] args) {
-        String s2 = "SELECT * FROM employee_payroll";
+        String s2 = "SELECT * FROM EMPLOYEE_PAYROLL WHERE START BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW())";
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement("update employee_payroll set basicPay =? where fname=?");
-            preparedStatement.setInt(1,3500000);
-            preparedStatement.setString(2,"Terisa");
             java.sql.Statement statement=connection.createStatement();
-            int result=preparedStatement.executeUpdate();
             ResultSet resultSet=statement.executeQuery(s2);
             while(resultSet.next()) {
                 int id = resultSet.getInt("id");
